@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
   if (token) {
     jwt.verify(token, secrets.jwtSecret, (err, decodedToken) => {
       if (err) {
-        res.status(401).json({ message: 'Wrong credentials' });
+        res.status(401).json({ message: 'Invalid credentials' });
       } else { 
         req.user = { 
           username: decodedToken.username
@@ -16,6 +16,6 @@ module.exports = (req, res, next) => {
       };
     });
   } else {
-    res.status(400).json({ message: 'token?' });
+    res.status(400).json({ message: 'No credentials provided' });
   };
 }
