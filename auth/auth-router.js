@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
-const getToken = require('./getToken.js')
 const { validateUser } = require('../users/validateUser.js')
+const jwt = require('jsonwebtoken');
 
 const Users = require('../users/users-model.js');
 
@@ -17,15 +17,11 @@ router.post('/register', (req, res) => {
         user.password = hash;
     
     Users.add(user)
-    .then(saved => {
-        const token = getToken(saved)
-        res.status(201).json(saved)
-    })
-    .catch(err => {
-        res.status(500).json(err);
-    })
+    .then(saved => res.status(201).json(saved))
+    .catch(err => res.status(500).json(err))
+
     } else {
-        res.status(400).json({ message: 'Invalid info about the user', erros: validateResult.erros })
+        res.status(400).json({ message: 'Invalid info about the user', errors: validateResult.errors })
     }
 })
 
@@ -51,5 +47,19 @@ router.post('/login', (req, res) => {
         res.status(500).json({ message: "this is login error"});
     })
 })
+
+function getToken(email) {
+    const payload = {
+        email
+    };
+    const secret = process.env.JWT_SECRET || 'Is it secret? Is it safe?'
+
+    const options = {
+        expiresIn: '1d'
+    };
+
+    return jwt.sign(payload, secret, options)
+}
+
 
 module.exports = router;

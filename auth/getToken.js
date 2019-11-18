@@ -5,7 +5,7 @@ function getToken(email) {
     const payload = {
         email
     };
-    jwtSecret
+    secret
 
     const options = {
         expiresIn: '1d'
