@@ -27,12 +27,14 @@ router.post('/register', (req, res) => {
 
 
 router.post('/login', (req, res) => {
+    console.log(req.body)
     let { name, email, password } = req.body;
     
     Users.findBy({ email })
     .first()
     .then(user => {
-        if(email && bcrypt.compareSync(password, user.password)) {
+        console.log('authrouter user log',user)
+        if(user && bcrypt.compareSync(password, user.password)) {
             const token = getToken(user)
         
         res.status(200).json({
