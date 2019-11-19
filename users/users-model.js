@@ -4,15 +4,20 @@ module.exports = {
     add,
     find,
     findBy,
-    findById
+    findById,
+    findByEmail,
 };
 
 function find() {
-    return db('users').select('id', 'username', 'password');
+    return db('users').select('id', 'email', 'password');
 }
 
 function findBy(filter) {
-    return db('users').where(filter);
+    return db('users').where(filter).first();
+}
+
+function findByEmail(email) {
+    return db('users').where({ email })
 }
 
 async function add(user) {
