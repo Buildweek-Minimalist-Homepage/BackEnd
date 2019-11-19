@@ -1,18 +1,6 @@
 const jwt = require('jsonwebtoken');
 const secret = require('../config/secrets.js')
 
-// function getToken(email) {
-//     const payload = {
-//         email
-//     };
-//     secret
-
-//     const options = {
-//         expiresIn: '1d'
-//     };
-
-//     return jwt.sign(payload, secret, options)
-// }
 
 function getToken(user) {
     const payload = {
@@ -20,7 +8,7 @@ function getToken(user) {
         email: user.email
     };
     const options = {
-        expiresIn: '1d'
+        expiresIn: '10d'
     };
     return jwt.sign(payload, process.env.SECRET || 'Is it secret? Is it safe?', options)
 }

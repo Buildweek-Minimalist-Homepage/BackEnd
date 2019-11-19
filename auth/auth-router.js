@@ -62,7 +62,7 @@ router.post('/login', async (req, res) => {
         res.status(200).json({
             message: `Welcome to our running app `,
             token: token,
-            password: userInfo.password
+            // password: userInfo.password
         });
         } else if(!user) {
             res.status(500).json({ message: 'No user'})
@@ -92,7 +92,7 @@ function getToken(user) {
         email: user.email
     };
     const options = {
-        expiresIn: '1d'
+        expiresIn: '10d'
     };
     return jwt.sign(payload, process.env.SECRET || 'Is it secret? Is it safe?', options)
 }

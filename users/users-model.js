@@ -6,6 +6,7 @@ module.exports = {
     findBy,
     findById,
     findByEmail,
+    getAllUsers,
 };
 
 function find() {
@@ -24,6 +25,10 @@ async function add(user) {
     const [id] = await db('users').insert(user);
 
     return findById(id);
+}
+
+function getAllUsers() {
+    return db('users')
 }
 
 function findById(id) {
