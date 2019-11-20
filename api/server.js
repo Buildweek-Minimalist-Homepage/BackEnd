@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const usersRouter = require('../users/users-router.js');
 const authRouter = require('../auth/auth-router.js');
+const quoteRouter = require('../quotes/quotes-router.js')
 
 const server = express();
 
@@ -13,6 +14,7 @@ server.use(cors());
 
 server.use('/api/users', usersRouter);
 server.use('/api/auth', authRouter);
+server.use('/api/quote', quoteRouter);
 
 server.get('/', (req, res) => {
     res.send("It's working?? maybe.")

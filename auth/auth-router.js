@@ -5,34 +5,6 @@ const jwt = require('jsonwebtoken');
 
 const Users = require('../users/users-model.js');
 
-
-// router.post('/register', (req, res) => {
-//     let user = req.body;
-    
-//     const validateResult = validateUser(user)
-//     console.log(validateResult)
-
-//     if(validateResult.isSuccessful === true) {
-//         const hash = bcrypt.hashSync(user.password, 12);
-//         user.password = hash;
-    
-//     Users.add(user)
-//     .then(saved => {
-//         const token = getToken(user.email)
-//         res.status(201).json({
-//             id: saved.id,
-//             email: saved.email,
-//             token: token
-//         })
-//     })
-//     .catch(err => res.status(500).json(err))
-
-//     } else {
-//         res.status(400).json({ message: 'Invalid info about the user', errors: validateResult.errors })
-//     }
-// })
-
-
 router.post('/register', validateUser, (req, res) => {
     let user = req.body;
     const hash = bcrypt.hashSync(user.password, 10);
@@ -72,19 +44,6 @@ router.post('/login', async (req, res) => {
         }
     })
 
-
-// function getToken(email) {
-//     const payload = {
-//         email
-//     };
-//     const secret = process.env.JWT_SECRET || 'Is it secret? Is it safe?'
-
-//     const options = {
-//         expiresIn: '1d'
-//     };
-
-//     return jwt.sign(payload, secret, options)
-// }
 
 function getToken(user) {
     const payload = {
