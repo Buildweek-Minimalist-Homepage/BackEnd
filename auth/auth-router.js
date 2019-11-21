@@ -4,6 +4,7 @@ const { validateUser } = require('../users/validateUser.js')
 const jwt = require('jsonwebtoken');
 
 const Users = require('../users/users-model.js');
+const Todo = require('../todo/todo-model.js')
 
 router.post('/register', validateUser, (req, res) => {
     let user = req.body;
@@ -44,6 +45,19 @@ router.post('/login', async (req, res) => {
         }
     })
 
+    router.post('/todo', (req, res) => {
+        const body = req.body
+        
+        Todo.addItem(body)
+            .then(item => {
+                res.status(200).json(item)
+            })
+            .catch(error => {
+                console.log(error)
+                res.status(500).json({ message: "Could not post new item" })
+            })
+
+    })
 
 function getToken(user) {
     const payload = {

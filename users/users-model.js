@@ -7,6 +7,9 @@ module.exports = {
     findById,
     findByEmail,
     getAllUsers,
+    updateUser,
+    deleteUserById,
+    deleteUserByEmail
 };
 
 function find() {
@@ -35,4 +38,25 @@ function findById(id) {
     return db('users')
     .where({ id })
     .first();
+}
+
+async function updateUser(id, changes) {
+    await db('users')
+        .where({ id })
+        .update(changes)
+
+    return findById(id)
+}
+
+function deleteUserById(id) {
+    return db("users")
+        .where({ id })
+        .del();
+
+}
+
+function deleteUserByEmail(email) {
+    return db('users')
+        .where({ email })
+        .del()
 }
