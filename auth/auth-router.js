@@ -38,10 +38,10 @@ router.post('/login', async (req, res) => {
             // password: userInfo.password
         });
         } else if(!user) {
-            res.status(500).json({ message: 'No user'})
+            res.status(401).json({ message: 'No user'})
         } else {
             console.log(user)
-            res.status(401).json({ message: "Shall not pass" })
+            res.status(500).json({ message: "Shall not pass" })
         }
     })
 
