@@ -23,10 +23,10 @@ router.post('/register', validateUser, (req, res) => {
 })
 
 
-router.post('/login', async (req, res) => {
+router.post('/login', (req, res) => {
     let userInfo = req.body;
     
-    let user = await Users.findByEmail(userInfo.email)
+    let user = Users.findByEmail(userInfo.email)
         console.log('authrouter user log',user)
 
         if(user) {
