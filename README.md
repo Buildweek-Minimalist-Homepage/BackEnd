@@ -1,6 +1,6 @@
-### Endpoints
+## Endpoints
 
-| POST Registration  | URL: https://minimalist-homepage.herokuapp.com/api/auth/register             |
+### POST Registration  | URL: https://minimalist-homepage.herokuapp.com/api/auth/register             |
 Payload: an object with the following.
 ```
 {
@@ -13,7 +13,9 @@ returns: an object with the user id, name, email, and password (encypted using b
 | 
 
 
-POST Login   | URL: https://minimalist-homepage.herokuapp.com/api/auth/login | Payload: an object with the following.
+### POST Login   | URL: https://minimalist-homepage.herokuapp.com/api/auth/login |
+
+Payload: an object with the following.
 ```
 {
    "name": "test01",
@@ -27,17 +29,27 @@ returns: an object with a welcome message and a token.
 ```
 
 
-| GET Users   | URL: https://minimalist-homepage.herokuapp.com/users/:id             | returns: an array of objects with user id, name, email.        |
+### GET Users   | URL: https://minimalist-homepage.herokuapp.com/users/:id           
+
+| returns: an array of objects with user id, name, email.        |
 
 
-| GET Quotes   | URL: https://minimalist-homepage.herokuapp.com/quotes         | returns an array of objects from a quotes API                                                                                                                           |
+### GET Quotes   | URL: https://minimalist-homepage.herokuapp.com/quotes       
+
+| returns an array of objects from a quotes API                                                                                                                           |
 
 
-| GET todo    | URL: https://minimalist-homepage.herokuapp.com/todo |returns all items from a todo list schema based on user_id                                                                                 |
+### GET todo    | URL: https://minimalist-homepage.herokuapp.com/todo
+
+|returns all items from a todo list schema based on user_id                                                                                 |
 
 
-| DELETE Users by id | URL: https://minimalist-homepage.herokuapp.com/users/:id          | Removes the post with the specified id and returns the **deleted post object**.  |
+### DELETE Users by id | URL: https://minimalist-homepage.herokuapp.com/users/:id      
+
+| Removes the post with the specified id and returns the **deleted post object**.  |
 
 
-| PUT  Edit users by id  | URL: https://minimalist-homepage.herokuapp.com/users/:id         | Updates the post with the specified `id` using data from the `request body`. Returns the modified document, **NOT the original**. 
+### PUT  Edit users by id  | URL: https://minimalist-homepage.herokuapp.com/users/:id        
+
+| Updates the post with the specified `id` using data from the `request body`. Returns the modified document, **NOT the original**. 
 Co
