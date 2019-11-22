@@ -18,7 +18,11 @@ router.post('/register', validateUser, (req, res) => {
             res.status(400).json({ error })
         })
 })
+
+
+
 router.post('/login', validateUser, (req, res) => {
+
     let userInfo = req.body;
     
     let user = Users.findByEmail(userInfo.email)

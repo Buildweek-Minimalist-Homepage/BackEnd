@@ -18,7 +18,10 @@ router.get('/:id', verifyUserId, (req, res) => {
     .then(user => {
         res.status(200).json(user);
     })
-    .catch(err => res.send(err))
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({ message: 'user not found' })
+    })
 })
 
 // router.get('/:id', verifyUserId, (req, res) => {
