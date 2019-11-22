@@ -2,15 +2,12 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const { validateUser } = require('../users/validateUser.js')
 const jwt = require('jsonwebtoken');
-
 const Users = require('../users/users-model.js');
 const Todo = require('../todo/todo-model.js')
-
 router.post('/register', validateUser, (req, res) => {
     let user = req.body;
     const hash = bcrypt.hashSync(user.password, 10);
     user.password = hash;
-
     Users.add(user)
         .then(new_user => {
             const token = getToken(new_user);
@@ -18,24 +15,20 @@ router.post('/register', validateUser, (req, res) => {
             res.status(201).json({ new_user, token })
         })
         .catch(error => {
-            res.status(500).json({ error })
+            res.status(400).json({ error })
         })
 })
-
-
-router.post('/login', async (req, res) => {
+router.post('/login', validateUser, (req, res) => {
     let userInfo = req.body;
     
-    let userToCheck = await Users.findByEmail(userInfo.email)
+    let user = Users.findByEmail(userInfo.email)
         console.log('authrouter user log',user)
-
-        if(userTCheck && bcrypt.compareSync(userInfo.password, userToCheck.password)) {
+        if(user) {
             const token = getToken(userInfo.email)
         
         res.status(200).json({
             message: `Welcome to our running app `,
-            token,
-            id: userToCheck.id
+            token: token,
             // password: userInfo.password
         });
         } else if(!user) {
@@ -45,7 +38,6 @@ router.post('/login', async (req, res) => {
             res.status(500).json({ message: "Shall not pass" })
         }
     })
-
     router.post('/todo', (req, res) => {
         const body = req.body
         
@@ -57,9 +49,7 @@ router.post('/login', async (req, res) => {
                 console.log(error)
                 res.status(500).json({ message: "Could not post new item" })
             })
-
     })
-
 function getToken(user) {
     const payload = {
         id: user.id,
@@ -70,6 +60,4 @@ function getToken(user) {
     };
     return jwt.sign(payload, process.env.SECRET || 'Is it secret? Is it safe?', options)
 }
-
-
 module.exports = router;
