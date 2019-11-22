@@ -23,18 +23,19 @@ router.post('/register', validateUser, (req, res) => {
 })
 
 
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
     let userInfo = req.body;
     
-    let user = Users.findByEmail(userInfo.email)
+    let userToCheck = await Users.findByEmail(userInfo.email)
         console.log('authrouter user log',user)
 
-        if(user) {
+        if(userTCheck && bcrypt.compareSync(userInfo.password, userToCheck.password)) {
             const token = getToken(userInfo.email)
         
         res.status(200).json({
             message: `Welcome to our running app `,
-            token: token,
+            token,
+            id: userToCheck.id
             // password: userInfo.password
         });
         } else if(!user) {
