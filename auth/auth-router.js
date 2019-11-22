@@ -18,12 +18,14 @@ router.post('/register', validateUser, (req, res) => {
             res.status(201).json({ new_user, token })
         })
         .catch(error => {
-            res.status(500).json({ error })
+            res.status(400).json({ error })
         })
 })
 
 
-router.post('/login', async (req, res) => {
+
+router.post('/login', validateUser, (req, res) => {
+
     let userInfo = req.body;
     
     let userToCheck = await Users.findByEmail(userInfo.email)
