@@ -1,7 +1,5 @@
 ### Endpoints
-Configure the API to handle to the following routes:
-| Method | Endpoint                | Description                                                                                                                                                                 |
-| ------ | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
 | POST Registration  | URL: https://minimalist-homepage.herokuapp.com/api/auth/register             |
 Payload: an object with the following.
 {
