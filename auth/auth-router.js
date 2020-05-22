@@ -72,6 +72,8 @@ function getToken(user) {
     const options = {
         expiresIn: '10d'
     };
+    // jwt is being signed with the id and email AND secret and options that expires in 10days
+    // Secret is to make sure it wasn't tampered with
     return jwt.sign(payload, process.env.SECRET || 'Is it secret? Is it safe?', options)
 }
 
