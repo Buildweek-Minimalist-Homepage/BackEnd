@@ -23,19 +23,21 @@ router.post('/register', validateUser, (req, res) => {
 })
 
 
-
+// Post call to login
 router.post('/login', validateUser, (req, res) => {
 
     let userInfo = req.body;
     
     let userToCheck = await Users.findByEmail(userInfo.email)
         console.log('authrouter user log',user)
-
-        if(userTCheck && bcrypt.compareSync(userInfo.password, userToCheck.password)) {
+        // Compare hash password to the password that was inputed
+        if(userToCheck && bcrypt.compareSync(userInfo.password, userToCheck.password)) {
+            // Defining the token
             const token = getToken(userInfo.email)
-        
+        // message 200 means request went thru
         res.status(200).json({
             message: `Welcome to our running app `,
+            // Send token to client
             token,
             id: userToCheck.id
             // password: userInfo.password
