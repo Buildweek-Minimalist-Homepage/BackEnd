@@ -24,24 +24,6 @@ router.get('/:id', verifyUserId, (req, res) => {
     })
 })
 
-// router.get('/:id', verifyUserId, (req, res) => {
-//     const {id} = req.params;
-
-//     Users.findById(id)
-//     .then(user => {
-//         if(user) {
-//             Todo.findById(user_id)
-//             .then(item => {
-//                 user.item = item
-//                 res.status(200).json(item)
-//             })
-//             .catch(err => res.status(500).json(err))
-//         } else {
-//             res.status(404).json({ error: 'user not found' })
-//         }
-//     })
-// })
-
 
 // ---------------------------- EDIT User by Id -----------------------------------
 router.put('/:id', verifyUserId, (req, res) => {
